@@ -79,10 +79,8 @@ pages_build_output_dir = ".vercel/output/static"
 
 ######## PRODUCTION environment config ########
 
- [env.production.vars]
+#[env.production.vars]
 # API_KEY = "abc123"
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
 
 # [[env.production.kv_namespaces]]
 # binding = "MY_KV_NAMESPACE"
