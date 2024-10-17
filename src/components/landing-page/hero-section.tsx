@@ -1,11 +1,12 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { ArrowRight, Gift, Gamepad2, CheckSquare } from "lucide-react";
 import Image from "next/image";
 import MaxWidthWrapper from "../max-width-wrapper";
+import Link from "next/link";
 
 export default function Component() {
   return (
-    <section className="relative w-full py-12 md:py-16 bg-green-50 overflow-hidden">
+    <section className="relative w-full pt-12 md:pt-16 bg-green-50 overflow-hidden">
       <MaxWidthWrapper>
         <div className="absolute inset-0 z-0">
           <div className="absolute top-0 left-0 w-48 h-48 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
@@ -16,7 +17,8 @@ export default function Component() {
             <div className="flex flex-col items-center lg:items-start space-y-4 text-center lg:text-left lg:w-1/2">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  Earn Money. Have Fun. Gain Plus.
+                  Earn Money. Have Fun.{" "}
+                  <span className="text-green-500">Gain Plus.</span>
                 </h1>
                 <p className="mx-auto lg:mx-0 max-w-[600px] text-gray-600 md:text-lg dark:text-gray-400">
                   Join our crowd-sourcing platform to complete micro-tasks, play
@@ -26,13 +28,18 @@ export default function Component() {
               </div>
 
               <div className="w-full max-w-sm space-y-2">
-                <Button
-                  className="w-full bg-green-500 hover:bg-green-600 text-white text-lg "
-                  size="lg"
+                <Link
+                  href="/dashboard"
+                  className={buttonVariants({
+                    variant: "default",
+                    size: "lg",
+                    className:
+                      "w-full bg-green-500 hover:bg-green-600 text-white text-lg",
+                  })}
                 >
                   Start Earning
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
+                </Link>
               </div>
 
               <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
