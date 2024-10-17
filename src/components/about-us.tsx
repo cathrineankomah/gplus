@@ -108,7 +108,7 @@ export function AboutUs() {
               </div>
               <div className="md:w-1/2">
                 <Image
-                  src="/placeholder.svg?height=300&width=400"
+                  src="/hero1.webp"
                   width={400}
                   height={300}
                   alt="Team working together"
