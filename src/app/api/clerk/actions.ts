@@ -31,6 +31,13 @@ export async function createUser({
       name: `${firstName} ${lastName}`.trim(),
       referralCode: nanoid(),
     })
+    .onConflictDoUpdate({
+      target: usersTable.id,
+      set: {
+        email,
+        name: `${firstName} ${lastName}`.trim(),
+      },
+    })
     .returning();
 
   await db.insert(activitiesTable).values({
