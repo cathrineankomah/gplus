@@ -108,7 +108,7 @@ export function AboutUs() {
               </div>
               <div className="md:w-1/2">
                 <Image
-                  src="/hero1.webp"
+                  src="https://utfs.io/f/gPOPMyBqj6JUrv7pfRUge0c698QUnKzmp34NvOb5uPIH2kAM"
                   width={400}
                   height={300}
                   alt="Team working together"

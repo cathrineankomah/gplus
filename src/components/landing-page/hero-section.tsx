@@ -64,7 +64,7 @@ export default function Component() {
             <div className="lg:w-1/2">
               <div className="relative w-full mx-auto">
                 <Image
-                  src="/hero1.webp"
+                  src="https://utfs.io/f/gPOPMyBqj6JUrv7pfRUge0c698QUnKzmp34NvOb5uPIH2kAM"
                   width={898}
                   height={834}
                   alt="App mockup"

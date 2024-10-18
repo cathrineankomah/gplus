@@ -12,7 +12,7 @@ export default function Header() {
         <nav className="flex h-16 items-center justify-between border-b border-zinc-200 dark:border-zinc-400">
           <Link href={"/"} className="z-40 flex items-center">
             <Image
-              src="/gain-logo.png"
+              src="https://utfs.io/f/gPOPMyBqj6JUd4xeYtC7w9PC4KfmB13J0hMnWyFboOZgaVcI"
               alt="Gain Plus"
               width={32}
               height={32}

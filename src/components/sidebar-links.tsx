@@ -17,8 +17,8 @@ export default function DashboardSidbarLinks() {
     { name: "Dashboard", icon: LayoutDashboard, url: "/dashboard" },
     { name: "Tasks", icon: CheckSquare, url: "/dashboard/tasks" },
     { name: "Raffles", icon: Gift, url: "/dashboard/raffles" },
-    { name: "Games", icon: Gamepad2, url: "/dashboard/games" },
-    { name: "Investments", icon: DollarSign, url: "/dashboard/investments" },
+    { name: "Games", icon: Gamepad2, url: "/dashboard/#" },
+    { name: "Investments", icon: DollarSign, url: "/dashboard/#" },
     { name: "Settings", icon: Settings, url: "/dashboard/#" },
   ];
 
