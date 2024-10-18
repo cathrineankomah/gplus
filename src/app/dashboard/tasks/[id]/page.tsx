@@ -6,6 +6,8 @@ interface TaskPageProps {
   params: { id: string };
 }
 
+export const runtime = "edge";
+
 export default async function TaskPage({ params }: TaskPageProps) {
   try {
     if (!params.id || typeof params.id !== "string") {
