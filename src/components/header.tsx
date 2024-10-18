@@ -17,6 +17,7 @@ export default function Header() {
               width={32}
               height={32}
               className="mr-2"
+              priority
             />
             <span>
               <p className="text-lg font-bold">Gain Plus</p>

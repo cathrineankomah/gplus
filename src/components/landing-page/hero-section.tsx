@@ -68,6 +68,7 @@ export default function Component() {
                   width={898}
                   height={834}
                   alt="App mockup"
+                  priority
                 />
                 <div className="absolute -top-2 -left-2 w-16 h-16 bg-green-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
                 <div className="absolute -bottom-2 -right-2 w-16 h-16 bg-yellow-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
