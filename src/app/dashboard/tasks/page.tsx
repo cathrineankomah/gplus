@@ -1,7 +1,11 @@
-import { FeatureUnderDevelopmentComponent } from "@/components/feature-under-development";
 import React from "react";
+import { TasksListingComponent } from "@/components/dashboard/tasks-listing";
+import { getAllAvailableTasks } from "@/server/api/task";
+import { getUserTasks } from "@/server/api/user";
 
 export const runtime = "edge";
-export default function TasksPage() {
-  return <FeatureUnderDevelopmentComponent featureName="Tasks" />;
+export default async function TasksPage() {
+  const tasks = await getAllAvailableTasks();
+  const userTasks = await getUserTasks();
+  return <TasksListingComponent tasks={tasks} taskCompletions={userTasks} />;
 }

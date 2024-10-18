@@ -1,6 +1,6 @@
 {
-  "id": "3b0fa81a-de2d-4f7e-86ff-d2cb4f82c77b",
-  "prevId": "7e0adb4f-e7fa-4494-8a21-42255ec35669",
+  "id": "09fe7713-94da-4300-a16b-c413802010dd",
+  "prevId": "3b0fa81a-de2d-4f7e-86ff-d2cb4f82c77b",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -646,21 +646,7 @@
           "with": {}
         }
       },
-      "foreignKeys": {
-        "tasks_created_by_users_id_fk": {
-          "name": "tasks_created_by_users_id_fk",
-          "tableFrom": "tasks",
-          "tableTo": "users",
-          "columnsFrom": [
-            "created_by"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {},
       "checkConstraints": {}

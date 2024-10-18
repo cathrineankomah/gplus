@@ -21,7 +21,7 @@ export async function createUser({
   }
   const nanoid = customAlphabet(
     "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-    10
+    5
   );
   const [newUser] = await db
     .insert(usersTable)
@@ -42,11 +42,9 @@ export async function createUser({
 
   await db.insert(activitiesTable).values({
     userId: newUser.id,
-    type: "USER_CREATED",
+    type: "user_created",
     message: `User ${newUser.name} created`,
   });
-
-  console.log("User created", newUser);
 }
 
 export async function updateUser({
@@ -70,11 +68,9 @@ export async function updateUser({
 
   await db.insert(activitiesTable).values({
     userId: updatedUser.id,
-    type: "USER_UPDATED",
+    type: "user_updated",
     message: `User ${updatedUser.name} updated`,
   });
-
-  console.log("User updated", updatedUser);
 }
 
 export async function deleteUser({ id }: { id: string }) {
@@ -84,11 +80,13 @@ export async function deleteUser({ id }: { id: string }) {
     .where(eq(usersTable.id, id))
     .returning();
 
+  if (!deletedUser) {
+    return;
+  }
+
   await db.insert(activitiesTable).values({
     userId: deletedUser.id,
-    type: "USER_DELETED",
+    type: "user_updated",
     message: `User ${deletedUser.name} deleted`,
   });
-
-  console.log("User deleted", deletedUser);
 }

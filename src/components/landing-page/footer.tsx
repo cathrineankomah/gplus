@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Facebook, Instagram, Twitter } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
 import MaxWidthWrapper from "../max-width-wrapper";
 
 export function FooterComponent() {
@@ -59,7 +59,14 @@ export function FooterComponent() {
                 <span className="sr-only">Twitter</span>
               </Link>
               <Link
-                href="https://instagram.com"
+                href="https://www.youtube.com/@gainplus-v8h"
+                className="text-green-200 hover:text-white"
+              >
+                <Youtube className="h-5 w-5" />
+                <span className="sr-only">Youtube</span>
+              </Link>
+              <Link
+                href="https://www.instagram.com/gain_plus24"
                 className="text-green-200 hover:text-white"
               >
                 <Instagram className="h-5 w-5" />

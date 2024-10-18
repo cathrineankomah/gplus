@@ -3,8 +3,7 @@
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
   CheckCircle,
@@ -17,48 +16,45 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
+import {
+  taskCompletionsTable,
+  activitiesTable,
+  usersTable,
+} from "@/server/db/schema";
+import { formatCurrency, formatRelativeTime } from "@/lib/utils";
+interface DashboardOverviewComponentProps {
+  tasks: (typeof taskCompletionsTable.$inferSelect)[];
+  activities: (typeof activitiesTable.$inferSelect)[];
+  user: typeof usersTable.$inferSelect;
+}
 
-export function DashboardOverviewComponent() {
+export function DashboardOverviewComponent({
+  tasks,
+  activities,
+  user,
+}: DashboardOverviewComponentProps) {
   const [isCopied, setIsCopied] = useState(false);
-  const referralLink = "https://gainplus.pro/ref/OU93js3o";
+
+  const referralLink = `${user.referralCode}`;
+  const tasksCompleted = tasks.filter(
+    (task) => task.taskStatus === "approved"
+  ).length;
+
   const userStats = [
     {
       title: "Tasks Completed",
-      value: 127,
+      value: tasksCompleted,
       icon: <CheckCircle className="h-4 w-4 text-green-500" />,
     },
     {
       title: "Gains Earned",
-      value: 5430,
+      value: user.gains,
       icon: <TrendingUp className="h-4 w-4 text-green-500" />,
     },
     {
       title: "Cash Available",
-      value: "$215.50",
+      value: formatCurrency(user.cash, user.currency),
       icon: <DollarSign className="h-4 w-4 text-green-500" />,
-    },
-  ];
-
-  const notifications = [
-    {
-      type: "Task Submitted",
-      message: "You submitted the task 'Data Entry for E-commerce'",
-      time: "2 hours ago",
-    },
-    {
-      type: "Gains Received",
-      message: "You received 50 Gains for completing a survey",
-      time: "5 hours ago",
-    },
-    {
-      type: "Raffle Won",
-      message: "Congratulations! You won a $10 gift card in the weekly raffle",
-      time: "1 day ago",
-    },
-    {
-      type: "Task Completed",
-      message: "Your task 'Website Testing' has been approved",
-      time: "2 days ago",
     },
   ];
 
@@ -71,13 +67,13 @@ export function DashboardOverviewComponent() {
   };
 
   return (
-    <div className="p-6 min-h-screen">
+    <div className="p-6 bg-gray-50 min-h-screen">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
         <h1 className="text-3xl font-bold text-gray-800">Dashboard Overview</h1>
         <div className="mt-4 md:mt-0 flex items-center">
-          <Link href={referralLink} className="w-64 text-blue-500 underline">
-            {referralLink}
-          </Link>
+          <p className="text-sm text-gray-500 mr-2">
+            Referral Code: {referralLink}
+          </p>
           <Button
             onClick={copyToClipboard}
             className="ml-2 bg-green-500 hover:bg-green-600 text-white"
@@ -132,27 +128,28 @@ export function DashboardOverviewComponent() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {notifications.map((notification, index) => (
+            {activities.map((activity, index) => (
               <div key={index}>
                 <div className="flex items-start">
                   <Badge
                     className="mr-2 mt-1 min-w-28 text-center"
                     variant={
-                      notification.type === "Raffle Won"
+                      activity.type === "cash_added" ||
+                      activity.type === "raffle_won"
                         ? "default"
                         : "secondary"
                     }
                   >
-                    {notification.type}
+                    {activity.type}
                   </Badge>
                   <div>
-                    <p className="text-sm text-gray-800">
-                      {notification.message}
+                    <p className="text-sm text-gray-800">{activity.message}</p>
+                    <p className="text-xs text-gray-500">
+                      {formatRelativeTime(activity.createdAt)}
                     </p>
-                    <p className="text-xs text-gray-500">{notification.time}</p>
                   </div>
                 </div>
-                {index < notifications.length - 1 && (
+                {index < activities.length - 1 && (
                   <Separator className="my-4" />
                 )}
               </div>
@@ -166,11 +163,24 @@ export function DashboardOverviewComponent() {
           <CardTitle className="text-xl font-bold">Quick Actions</CardTitle>
         </CardHeader>
         <CardContent className="flex flex-wrap gap-4">
-          <Button className="bg-green-500 hover:bg-green-600 text-white">
+          <Link
+            href="/dashboard/tasks"
+            className={buttonVariants({ variant: "default" })}
+          >
             Find New Tasks
-          </Button>
-          <Button variant="outline">View Raffles</Button>
-          <Button variant="outline">Withdraw Cash</Button>
+          </Link>
+          <Link
+            href="/dashboard/raffles"
+            className={buttonVariants({ variant: "outline" })}
+          >
+            View Raffles
+          </Link>
+          <Link
+            href="/dashboard/withdraw"
+            className={buttonVariants({ variant: "outline" })}
+          >
+            Withdraw Cash
+          </Link>
         </CardContent>
       </Card>
     </div>
