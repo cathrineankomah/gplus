@@ -137,16 +137,18 @@ export const taskCompletionsTable = pgTable(
     id: uuid("id").primaryKey().defaultRandom(),
     userId: text("user_id")
       .notNull()
-      .references(() => usersTable.id),
+      .references(() => usersTable.id, { onDelete: "cascade" }),
     taskId: uuid("task_id")
       .notNull()
-      .references(() => tasksTable.id),
+      .references(() => tasksTable.id, { onDelete: "cascade" }),
     submissionData: text("submission_data").notNull(),
     submissionType: submissionTypeEnum("submission_type").notNull(),
     taskStatus: taskCompletionStatusEnum("task_status")
       .notNull()
       .default("pending"),
-    verifierId: text("verifier_id").references(() => usersTable.id),
+    verifierId: text("verifier_id").references(() => usersTable.id, {
+      onDelete: "set null",
+    }),
     createdAt: timestamp("created_at").notNull().defaultNow(),
     updatedAt: timestamp("updated_at")
       .notNull()
@@ -171,7 +173,9 @@ export const rafflesTable = pgTable(
     entryGains: integer("entry_gains").notNull(),
     numberOfEntries: integer("number_of_entries").notNull(),
     limit: integer("limit"),
-    winnerId: text("winner_id").references(() => usersTable.id),
+    winnerId: text("winner_id").references(() => usersTable.id, {
+      onDelete: "set null",
+    }),
     imageUrl: text("image_url"),
     status: raffleStatusEnum("status").notNull().default("active"),
     createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -196,10 +200,10 @@ export const raffleEntriesTable = pgTable(
     id: uuid("id").primaryKey().defaultRandom(),
     raffleId: uuid("raffle_id")
       .notNull()
-      .references(() => rafflesTable.id),
+      .references(() => rafflesTable.id, { onDelete: "cascade" }),
     userId: text("user_id")
       .notNull()
-      .references(() => usersTable.id),
+      .references(() => usersTable.id, { onDelete: "cascade" }),
     createdAt: timestamp("created_at").notNull().defaultNow(),
   },
   (table) => ({
@@ -217,7 +221,7 @@ export const transactionsTable = pgTable(
     id: serial("id").primaryKey(),
     userId: text("user_id")
       .notNull()
-      .references(() => usersTable.id),
+      .references(() => usersTable.id, { onDelete: "cascade" }),
     amount: integer("amount").notNull(),
     type: transactionTypeEnum("type").notNull(),
     description: text("description"),
@@ -238,7 +242,7 @@ export const activitiesTable = pgTable(
     id: serial("id").primaryKey(),
     userId: text("user_id")
       .notNull()
-      .references(() => usersTable.id),
+      .references(() => usersTable.id, { onDelete: "cascade" }),
     type: activityTypeEnum("type").notNull(),
     message: text("message").notNull(),
     createdAt: timestamp("created_at").notNull().defaultNow(),

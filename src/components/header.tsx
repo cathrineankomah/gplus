@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { buttonVariants } from "./ui/button";
 import Image from "next/image";
+import ClerkUserButton from "./clerk-user-button";
 
 export default function Header() {
   return (
@@ -45,17 +46,22 @@ export default function Header() {
             </div>
           </SignedOut>
           <SignedIn>
-            <div className="flex items-center space-x-4">
-              <Link
-                className={buttonVariants({
-                  variant: "outline",
-                  className: "border-primary hidden md:flex",
-                })}
-                href={"/dashboard"}
-              >
-                Dashboard
-              </Link>
-              <UserButton />
+            <div className="">
+              <div className="hidden md:flex  items-center space-x-4">
+                <Link
+                  className={buttonVariants({
+                    variant: "outline",
+                    className: "border-primary hidden md:flex",
+                  })}
+                  href={"/dashboard"}
+                >
+                  Dashboard
+                </Link>
+                <UserButton />
+              </div>
+              <div className="md:hidden">
+                <ClerkUserButton />
+              </div>
             </div>
           </SignedIn>
         </nav>
